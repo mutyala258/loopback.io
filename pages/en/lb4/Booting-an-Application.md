@@ -15,15 +15,15 @@ organized in different folders. **Booting an Application** means:
 
 * Discover artifacts automatically based on a convention (a specific folder
   containing files with a given suffix)
-* Process those artifacts automatically (this usually means binding them to the Application)
+* Process those artifacts (this usually means automatically binding them to the Application context)
 
 `@loopback/boot` provides a Bootstrapper that uses Booters to automatically
-discover and bind artifacts, all packaged in an easy to use Mixin.
+discover and bind artifacts, all packaged in an easy-to-use Mixin.
 
 ### What is an artifact?
 
-An artifact is any LoopBack construct usually defined in code as a Class. The word
-artifact describes Controllers, Repositories, Models, etc.
+An artifact is any LoopBack construct usually defined in code as a Class. LoopBack
+constructs include Controllers, Repositories, Models, etc.
 
 ## Usage: @loopback/cli
 
@@ -54,8 +54,8 @@ used to set the `projectRoot` by using the `__dirname` variable. _(See example b
 #### Using the BootMixin
 
 `Booter` and `Binding` types must be imported alongside `BootMixin` to allow TypeScript
-to infer types and avoid errors. \_If using `tslint` with the `no-unused-variable` rule,
-you can disable it for the import line by adding `// tslint:disable-next-line:no-unused-variable`.
+to infer types and avoid errors. _If using `tslint` with the `no-unused-variable` rule,
+you can disable it for the import line by adding `// tslint:disable-next-line:no-unused-variable`_.
 
 ```ts
 import { BootMixin, Booter, Binding } from "@loopback/boot";
@@ -90,8 +90,8 @@ async main() {
 ### app.booters()
 
 A convenience method manually bind `Booters`. You can pass any number of `Booter`
-classes to this method and they will all get bound to the Application using the
-prefix and tag used by the `Bootstrapper`.
+classes to this method and they will all get bounded to the Application using the
+prefix (`booters.`) and tag (`booter`) used by the `Bootstrapper`.
 
 ```ts
 // Binds MyCustomBooter to `booters.MyCustomBooter`
@@ -102,7 +102,7 @@ app.booters(MyCustomBooter, AnotherCustomBooter);
 
 ## BootComponent
 
-This component is added to a Application by `BootMixin` if used. The Component:
+This component is added to an Application by `BootMixin` if used. This Component:
 
 * Provides a list of default `booters` as a property of the component
 * Binds the conventional Bootstrapper to the Application
@@ -117,12 +117,12 @@ app.component(BootComponent);
 ## Bootstrapper
 
 A Class that acts as the "manager" for Booters. The Boostrapper is designed to be
-bound to an Application as a `SINGLETON`. The Bootstrapper class provides a `boot()`
+bounded to an Application as a `SINGLETON`. The Bootstrapper class provides a `boot()`
 method. This method is responsible for getting all bound `Booters` and running
 their `phases`. A `phase` is a method on a `Booter` class.
 
-Each call of the `boot()` method creates a new `Context` that sets the `app` context
-as it's parent. This is done so each `Context` for `boot` gets a new instance of
+Each `boot()` method call creates a new `Context` that sets the `app` context
+as its parent. This is done so each `Context` for `boot` gets a new instance of
 `booters` but the same context can be passed into `boot` so selective `phases` can be
 run in different calls of `boot`.
 
