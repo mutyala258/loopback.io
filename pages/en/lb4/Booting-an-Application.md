@@ -45,10 +45,10 @@ convenience methods such as `app.boot()` and `app.booters()`. The Mixin also all
 Components to set the property `booters` as an Array of `Booters`. They will be bound
 to the Application and called by the `Bootstrapper`.
 
-Since this is a convention based Bootstrapper, it is important to set a `projectRoot`,
+Since this is a convention-based Bootstrapper, it is important to set a `projectRoot`,
 as all other artifact paths will be resolved relative to this path.
 
-_Tip_: `application.ts` will likely be at the root of your project, so it's path can be
+_Tip_: `application.ts` will likely be at the root of your project, so its path can be
 used to set the `projectRoot` by using the `__dirname` variable. _(See example below)_
 
 #### Using the BootMixin
@@ -72,7 +72,7 @@ class MyApplication extends BootMixin(Application) {
 ### app.boot()
 
 A convenience method to retrieve the `Bootstrapper` instance bound to the
-Application and calls it's `boot` function. This should be called before an
+Application and calls its `boot` function. This should be called before an
 Application's `start()` method is called. _This is an `async` function and should
 be called with `await`._
 
@@ -89,8 +89,8 @@ async main() {
 
 ### app.booters()
 
-A convenience method manually bind `Booters`. You can pass any number of `Booter`
-classes to this method and they will all get bounded to the Application using the
+A convenience method to manually bind `Booters`. You can pass any number of `Booter`
+classes to this method and they will all be bound to the Application using the
 prefix (`booters.`) and tag (`booter`) used by the `Bootstrapper`.
 
 ```ts
@@ -116,8 +116,8 @@ app.component(BootComponent);
 
 ## Bootstrapper
 
-A Class that acts as the "manager" for Booters. The Boostrapper is designed to be
-bounded to an Application as a `SINGLETON`. The Bootstrapper class provides a `boot()`
+A Class that acts as the "manager" for Booters. The Bootstrapper is designed to be
+bound to an Application as a `SINGLETON`. The Bootstrapper class provides a `boot()`
 method. This method is responsible for getting all bound `Booters` and running
 their `phases`. A `phase` is a method on a `Booter` class.
 
@@ -126,11 +126,11 @@ as its parent. This is done so each `Context` for `boot` gets a new instance of
 `booters` but the same context can be passed into `boot` so selective `phases` can be
 run in different calls of `boot`.
 
-The boostrapper can be configured to run only certain booters or phases of booters
+The Bootstrapper can be configured to run specific booters or boot phases
 by passing in `BootExecOptions`. **This is experimental and subject to change. Hence,
 this functionality is not exposed when calling `boot()` via `BootMixin`**.
 
-To use `BootExecOptions` you must directly call `bootstrapper.boot()` instead of `app.boot()`.
+To use `BootExecOptions`, you must directly call `bootstrapper.boot()` instead of `app.boot()`.
 You can pass in the `BootExecOptions` object with the following properties:
 
 | Property         | Type                    | Description                                      |
